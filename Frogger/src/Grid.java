@@ -21,6 +21,7 @@ public class Grid {
 		
 		
 	}
+	//
 	
 	public Grid(int argS, int argL, int argH) {
 		segmentsize = argS;

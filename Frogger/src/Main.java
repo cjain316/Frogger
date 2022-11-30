@@ -30,6 +30,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 		repaint();
 		
 	}
+	//
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
