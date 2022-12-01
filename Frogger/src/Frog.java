@@ -4,7 +4,7 @@ import java.awt.Graphics;
 public class Frog {
 	int x,y;
 	int size;
-	//a
+	//as
 	
 	public Frog() {
 		x = 0;
