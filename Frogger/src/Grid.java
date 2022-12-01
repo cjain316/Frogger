@@ -10,7 +10,7 @@ public class Grid {
 	public Grid() {
 		segmentsize = 32;
 		length = 50;
-		height = 28;
+		height = 26;
 		grid = new boolean[length][height];
 		
 		for (int i = 0; i < length;i++) {

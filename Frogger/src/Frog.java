@@ -7,9 +7,9 @@ public class Frog {
 	//
 	
 	public Frog() {
-		x = 25;
-		y = 6;
-		size = 16;
+		x = 0;
+		y = 0;
+		size = 32;
 	}
 	
 	public Frog(int argX,int argY,int argS) {

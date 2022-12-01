@@ -21,7 +21,6 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	public void paint(Graphics g) {
         super.paintComponent(g);
         player.paint(g);
-        grid.paint(g);
 	}
 
 	@Override
@@ -35,18 +34,16 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(arg0.getExtendedKeyCode());
-		System.out.println(c.toString());
-		if (arg0.getExtendedKeyCode() == 87) {
+		if (arg0.getExtendedKeyCode() == 87 && player.getY() > 0) {
 			player.setY(player.getY()-1);
 		}
-		if (arg0.getExtendedKeyCode() == 65) {
+		if (arg0.getExtendedKeyCode() == 65 && player.getX() > 0) {
 			player.setX(player.getX()-1);
 		}
-		if (arg0.getExtendedKeyCode() == 83) {
+		if (arg0.getExtendedKeyCode() == 83 && player.getY() <= grid.getHeight()) {
 			player.setY(player.getY()+1);
 		}
-		if (arg0.getExtendedKeyCode() == 68) {
+		if (arg0.getExtendedKeyCode() == 68 && player.getX() <= grid.getLength()) {
 			player.setX(player.getX()+1);
 		}
 		
@@ -69,7 +66,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
     public Main() {
         JFrame f = new JFrame("Le Froge");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(1600,900);
+        f.setSize(1680,934);
         f.add(this);
         f.addKeyListener(this);
         
