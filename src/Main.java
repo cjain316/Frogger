@@ -10,7 +10,7 @@ import javax.swing.Timer;
 
 public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grid grid = new Grid();
-	private Frog player = new Frog();
+	private Frog player = new Frog(0, 0,32, "Resources//FrogJump.gif");
 	private Log[] first = new Log[grid.getLength()+4];
 	private Background background = new Background(0,0,"Resources//background.png");
 	Timer c = new Timer(1,this);
