@@ -11,16 +11,27 @@ import javax.swing.Timer;
 public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grid grid = new Grid();
 	private Frog player = new Frog();
+	private Log[] first = new Log[grid.getLength()+4];
+	private Background background = new Background(0,0,"Resources//background.png");
 	Timer c = new Timer(1,this);
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Main f = new Main();
+		
 	}
 	
 	public void paint(Graphics g) {
         super.paintComponent(g);
-        player.paint(g);
+        background.paint(g);
+        grid.paint(g);
+        for (int i = 0;i<first.length;i++) {
+        	if(first[i] != null) {
+        		first[i].update(grid,player);
+        		first[i].paint(g);
+        	}
+        }
+        player.paint(g,grid);
 	}
 
 	@Override
@@ -64,6 +75,12 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	Timer t;
     
     public Main() {
+    	for (int i = 0; i < first.length;i++) {
+        	if (i%6!=0 && i%6!=1 && i%6!=2) {
+        		first[i] = new Log(i,8,true,1);
+        	}
+    	}
+    	
         JFrame f = new JFrame("Le Froge");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(1680,934);
@@ -73,6 +90,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         t = new Timer(7, this);
         t.start();
         f.setVisible(true);
+        
        
         
     }

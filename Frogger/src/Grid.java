@@ -8,9 +8,9 @@ public class Grid {
 	private int segmentsize;
 	
 	public Grid() {
-		segmentsize = 32;
-		length = 50;
-		height = 26;
+		segmentsize = 64;
+		length = 24;
+		height = 12;
 		grid = new boolean[length][height];
 		
 		for (int i = 0; i < length;i++) {
@@ -18,8 +18,6 @@ public class Grid {
 				grid[i][a] = false;
 			}
 		}
-		
-		
 	}
 	//
 	

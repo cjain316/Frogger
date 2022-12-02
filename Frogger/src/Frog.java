@@ -9,7 +9,7 @@ public class Frog {
 	public Frog() {
 		x = 0;
 		y = 0;
-		size = 32;
+		size = 64;
 	}
 	
 	public Frog(int argX,int argY,int argS) {
@@ -27,9 +27,9 @@ public class Frog {
 	public void setY(int argY)    {y = argY;}
 	public void setSize(int argS) {size = argS;}
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics g, Grid f) {
 		Color c = new Color(0,0,0);
         g.setColor(c);
-        g.fillRect(x*32, y*32, size, size);
+        g.fillRect(x*f.getSegmentSize(), y*f.getSegmentSize(), size, size);
     }
 }
