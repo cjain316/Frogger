@@ -12,8 +12,10 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grid grid = new Grid();
 	private Frog player = new Frog(0, 0,32, "Resources//FrogJump.gif");
 	private Log[] first = new Log[grid.getLength()+4];
+	private Car[][] cars = new Car[grid.getLength()][grid.getHeight()];
 	private Background background = new Background(0,0,"Resources//background.png");
 	private Grass grass = new Grass(grid);
+	private Street street = new Street(grid);
 	Timer c = new Timer(1,this);
 	
 	public static void main(String[] args) {
@@ -27,10 +29,18 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         background.paint(g);
         grid.paint(g);
         grass.paint(g, grid);
+        street.paint(g, grid);
         for (int i = 0;i<first.length;i++) {
         	if(first[i] != null) {
         		first[i].update(grid,player);
         		first[i].paint(g);
+        	}
+        }
+        for (int i = 0;i<grid.getLength();i++) {
+        	for (int a = 0;a<grid.getLength();a++) {
+        	if(first[i] != null) {
+        		first[i].update(grid,player);
+        		first[i][a].paint(g);
         	}
         }
         player.paint(g,grid);
@@ -83,13 +93,24 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         	}
     	}
     	
+    	//generate cars
+    	for (int i = 0; i < grid.getLength();i++) {
+    		for (int a = 0; a < grid.getHeight();a++) {
+    			if (grid.getValue(i, a) == 3) {
+    				if ((int)(Math.random()*10) > 7) {
+    					cars[i][a] = new Car(i,a,true,1);
+    				}
+    			}
+    		}
+    	}
+    	
         JFrame f = new JFrame("Le Froge");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(1680,934);
         f.add(this);
         f.addKeyListener(this);
         
-        t = new Timer(7, this);
+        t = new Timer(60, this);
         t.start();
         f.setVisible(true);
         

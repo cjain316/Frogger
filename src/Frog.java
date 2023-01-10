@@ -11,15 +11,18 @@ public class Frog {
 	public AffineTransform tx;
 	int x,y;
 	int size;
+	private boolean alive;
 	//as
 	
 	public Frog() {
+		alive = true;
 		x = 0;
 		y = 0;
 		size = 64;
 	}
 	
 	public Frog(int argX,int argY,int argS,  String path) {
+		alive = true;
 		x = argX;
 		y = argY;
 		size = argS;
@@ -30,10 +33,12 @@ public class Frog {
 	public int getX()    {return x;}
 	public int getY()    {return y;}
 	public int getSize() {return size;}
+	public boolean getAlive()    {return alive;}
 	
 	public void setX(int argX)    {x = argX;}
 	public void setY(int argY)    {y = argY;}
 	public void setSize(int argS) {size = argS;}
+	public void setAlive(boolean argS) {alive = argS;}
 	
 	
 	public void paint(Graphics g, Grid f) {
