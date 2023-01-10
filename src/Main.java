@@ -13,6 +13,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	private Frog player = new Frog(0, 0,32, "Resources//FrogJump.gif");
 	private Log[] first = new Log[grid.getLength()+4];
 	private Background background = new Background(0,0,"Resources//background.png");
+	private Grass grass = new Grass(grid);
 	Timer c = new Timer(1,this);
 	
 	public static void main(String[] args) {
@@ -25,6 +26,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         super.paintComponent(g);
         background.paint(g);
         grid.paint(g);
+        grass.paint(g, grid);
         for (int i = 0;i<first.length;i++) {
         	if(first[i] != null) {
         		first[i].update(grid,player);
