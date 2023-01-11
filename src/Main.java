@@ -13,7 +13,6 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	private Frog player = new Frog(0, 0,32, "Resources//FrogJump.gif");
 	private Log[] first = new Log[grid.getLength()+4];
 	private Car[][] cars = new Car[grid.getLength()][grid.getHeight()];
-	private Background background = new Background(0,0,"Resources//background.png");
 	private Grass grass = new Grass(grid);
 	private Street street = new Street(grid);
 	Timer c = new Timer(1,this);
@@ -26,7 +25,6 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	
 	public void paint(Graphics g) {
         super.paintComponent(g);
-        background.paint(g);
         grid.paint(g);
         grass.paint(g, grid);
         street.paint(g, grid);
@@ -37,10 +35,10 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         	}
         }
         for (int i = 0;i<grid.getLength();i++) {
-        	for (int a = 0;a<grid.getLength();a++) {
-        	if(first[i] != null) {
-        		first[i].update(grid,player);
-        		first[i].paint(g);
+        	for (int a = 0;a<grid.getHeight();a++) {
+        	if(cars[i][a] != null) {
+        		cars[i][a].update(grid,player);
+        		cars[i][a].paint(g);
         	}
         }
         player.paint(g,grid);
@@ -88,18 +86,15 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	Timer t;
     
     public Main() {
-    	for (int i = 0; i < first.length;i++) {
-        	if (i%6!=0 && i%6!=1 && i%6!=2) {
-        		first[i] = new Log(i,8,true,1);
-        	}
-    	}
     	
     	//generate cars
+    	boolean randir;
     	for (int i = 0; i < grid.getLength();i++) {
+    		randir = randomBool();
     		for (int a = 0; a < grid.getHeight();a++) {
     			if (grid.getValue(i, a) == 3) {
     				if ((int)(Math.random()*10) > 7) {
-    					cars[i][a] = new Car(i,a,true,1);
+    					cars[i][a] = new Car(i,a,randir,1,grid);
     				}
     			}
     		}
@@ -110,6 +105,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         f.setSize(1680,934);
         f.add(this);
         f.addKeyListener(this);
+        f.setResizable(false);
         
         t = new Timer(60, this);
         t.start();
@@ -117,6 +113,15 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         
        
         
+    }
+    
+    private boolean randomBool() {
+    	int ran = (int)(Math.random()*2);
+    	if (ran == 0) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 
 }

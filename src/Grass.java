@@ -29,7 +29,6 @@ public class Grass {
 				}
 			}
 		}
-		System.out.println(g.toString());
 	}
 	
 	public void paint(Graphics g, Grid f) {

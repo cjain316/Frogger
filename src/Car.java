@@ -14,22 +14,52 @@ public class Car extends JPanel {
 	private int size = 64;
 	private int width;
 	private int counter = 0;
+	private int color;
 	public Image Sprite;
 	public AffineTransform tx;
-	private String path = "Resources//Orange_car.gif";
+	private String[] sprites = {"Resources//Orange_car.gif","Resources//Blue_car.gif","Resources//Green_car.gif"};
 	
-	public Car() {
+	public Car(Grid g) {
 		x = 0;
 		y = 0;
 		direction = true;
 		width = 3;
+		int ran;
+		for (int i = 0; i < g.getLength(); i++) {
+			for (int a = 0; a < g.getHeight(); a++) {
+				if (g.getValue(i,a) == 1 || g.getValue(i, a) == 0) {
+					ran = (int)(Math.random()*10);
+					if (ran >= 9) {
+						g.setValue(i, a, 4);
+					} else if (ran > 6) {
+						g.setValue(i, a, 5);
+					} else {
+						g.setValue(i, a, 6);
+					}
+				
+				}
+			}
+		}
 	}
 	
-	public Car(int argx, int argy, boolean argdirection, int argw) {
+	public Car(int argx, int argy, boolean argdirection, int argw, Grid g) {
 		x = argx;
 		y = argy;
 		direction = argdirection;
 		width = argw;
+		int ran;
+		for (int i = 0; i < g.getLength(); i++) {
+			for (int a = 0; a < g.getHeight(); a++) {
+				ran = (int)(Math.random()*3);
+				if (ran == 0) {
+					color = 0;
+				} else if (ran == 1) {
+					color = 1;
+				} else {
+					color = 2;
+				}
+			}
+		}
 	}
 	
 	public void update(Grid g,Frog f) {
@@ -46,10 +76,9 @@ public class Car extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		Sprite = getImage(path);
-        tx = AffineTransform.getTranslateInstance(x*64, y*64);
-		Color c = new Color(0,0,0);
 		Graphics2D g2 = (Graphics2D) g;
+        tx = AffineTransform.getTranslateInstance(x*64, y*64);
+        Sprite = getImage(sprites[color]);
         g2.drawImage(Sprite, tx, null);
     }
 	
