@@ -40,10 +40,11 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         	for (int a = 0;a<grid.getLength();a++) {
         	if(first[i] != null) {
         		first[i].update(grid,player);
-        		first[i][a].paint(g);
+        		first[i].paint(g);
         	}
         }
         player.paint(g,grid);
+        }
 	}
 
 	@Override
