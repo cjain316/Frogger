@@ -16,7 +16,7 @@ public class Log extends JPanel {
 	private int counter = 0;
 	public Image Sprite;
 	public AffineTransform tx;
-	private String path = "Resources//wood.png";
+	private String path = "Resources//Log.gif";
 	
 	public Log() {
 		x = 0;
