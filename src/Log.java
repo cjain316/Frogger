@@ -14,9 +14,11 @@ public class Log extends JPanel {
 	private int size = 64;
 	private int width;
 	private int counter = 0;
+	private int spriter;
+	private int artificial;
 	public Image Sprite;
 	public AffineTransform tx;
-	private String path = "Resources//Log.gif";
+	private String[] sprites = {"Resources//Log.gif","Resources//Lilypad.gif"};
 	
 	public Log() {
 		x = 0;
@@ -25,19 +27,24 @@ public class Log extends JPanel {
 		width = 3;
 	}
 	
-	public Log(int argx, int argy, boolean argdirection, int argw) {
+	public Log(int argx, int argy, boolean argdirection, int argw, Grid g) {
 		x = argx;
 		y = argy;
 		direction = argdirection;
 		width = argw;
+		spriter = (int)(Math.random()*2);
 	}
 	
 	public void update(Grid g,Frog f) {
 		counter++;
-		if (x >= g.getLength() + 2) {
+		artificial = counter * -1;
+		if (x > g.getLength() + 2) {
 			x = 0;
 		}
-		if (counter == 20) {
+		if (x < 0) {
+			x = g.getLength();
+		}
+		if (counter == 8) {
 			counter = 0;
 			if (direction) {
 				if (f.getX() == x && f.getY() == y) {
@@ -53,9 +60,30 @@ public class Log extends JPanel {
 		}
 	}
 	
+	public int getArtificial() {
+		return artificial;
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public boolean getDir() {
+		return direction;
+	}
+	public boolean getCounter() {
+		return direction;
+	}
+	
 	public void paint(Graphics g) {
-		Sprite = getImage(path);
-        tx = AffineTransform.getTranslateInstance(x*64, y*64);
+		Sprite = getImage(sprites[spriter]);
+		if (direction) {
+			tx = AffineTransform.getTranslateInstance(x*64+(counter*8), y*64);
+		}
+		if (!direction) {
+			tx = AffineTransform.getTranslateInstance(x*64-(counter*8), y*64);
+		}
 		Color c = new Color(0,0,0);
 		Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(Sprite, tx, null);

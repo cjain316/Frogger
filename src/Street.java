@@ -17,6 +17,7 @@ public class Street {
 	public Street(Grid g) {
 		generateRoad(2,10,g);
 		generateRoad(1,8,g);
+		generateRoad(2,2,g);
 
 		System.out.println(g.toString());
 	}

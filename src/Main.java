@@ -10,11 +10,12 @@ import javax.swing.Timer;
 //a
 public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grid grid = new Grid();
-	private Frog player = new Frog(grid.getLength()/2, grid.getHeight()-1,32, "Resources//FrogIdle.gif");
-	private Log[] first = new Log[grid.getLength()+4];
+	private Frog player = new Frog(grid.getLength()/2, grid.getHeight()-2,32, "Resources//FrogIdle.gif");
+	private Log[][] logs = new Log[grid.getLength()+4][grid.getHeight()];
 	private Car[][] cars = new Car[grid.getLength()][grid.getHeight()];
 	private Grass grass = new Grass(grid);
 	private Street street = new Street(grid);
+	private Water water = new Water(grid);
 	Timer c = new Timer(1,this);
 	
 	public static void main(String[] args) {
@@ -28,21 +29,46 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         grid.paint(g);
         grass.paint(g, grid);
         street.paint(g, grid);
-        for (int i = 0;i<first.length;i++) {
-        	if(first[i] != null) {
-        		first[i].update(grid,player);
-        		first[i].paint(g);
+        water.paint(g, grid);
+        for (int i = 0;i<grid.getLength();i++) {
+        	for (int a = 0;a<grid.getHeight();a++) {
+        		if(logs[i][a] != null) {
+        			logs[i][a].update(grid,player);
+        			logs[i][a].paint(g);
+        		}
         	}
         }
         for (int i = 0;i<grid.getLength();i++) {
         	for (int a = 0;a<grid.getHeight();a++) {
-        	if(cars[i][a] != null) {
-        		cars[i][a].update(grid,player);
-        		cars[i][a].paint(g);
+        		if(cars[i][a] != null) {
+        			cars[i][a].update(grid,player);
+        			cars[i][a].paint(g);
+        		}
         	}
         }
-        player.paint(g,grid);
+        if (getRiding()[0] != -1) {player.paint(g,grid,logs[getRiding()[0]][getRiding()[1]]);} 
+        else {player.paint(g, grid, null);}
+        
+       }
+	
+	private int[] getRiding() {
+		int[] output = new int[2];
+		for (int i = 0;i<grid.getLength();i++) {
+            for (int a = 0;a<grid.getHeight();a++) {
+            	if (logs[i][a] != null) {
+            		if (logs[i][a].getX() == player.getX()) {
+            			if (logs[i][a].getY() == player.getY()) {
+            				output[0] = i;
+            				output[1] = a;
+            				return output;
+            			}
+            		}
+            	}
+            }
         }
+		output[0] = -1;
+		output[1] = -1;
+		return output;
 	}
 
 	@Override
@@ -95,6 +121,17 @@ public class Main extends JPanel implements KeyListener, ActionListener {
     			if (grid.getValue(i, a) == 3) {
     				if ((int)(Math.random()*10) > 5) {
     					cars[i][a] = new Car(i,a,randir,1,grid);
+    				}
+    			}
+    		}
+    	}
+    	//generate logs
+    	for (int a = 0; a < grid.getHeight();a++) {
+    		randir = randomBool();
+    		for (int i = 0; i < grid.getLength();i++) {
+    			if (grid.getValue(i, a) == 8) {
+    				if ((int)(Math.random()*10) > 5) {
+    					logs[i][a] = new Log(i,a,randir,1,grid);
     				}
     			}
     		}

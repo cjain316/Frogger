@@ -41,14 +41,22 @@ public class Frog {
 	public void setAlive(boolean argS) {alive = argS;}
 	
 	
-	public void paint(Graphics g, Grid f) {
-        update(f);
+	public void paint(Graphics g, Grid f, Log l) {
+        update(f,l);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(Sprite, tx, null);
     }
 
-	public void update(Grid f) {
-        tx.setToTranslation(x*f.getSegmentSize()+16, y*f.getSegmentSize()+16);
+	public void update(Grid f,Log l) {
+		if (alive == false) {
+			x = f.getLength()/2;
+			y = f.getHeight()-2;
+		}
+		if (l!=null) {
+			tx.setToTranslation(x*f.getSegmentSize()+16+(l.getArtificial()*8), y*f.getSegmentSize()+16);
+		} else {
+			tx.setToTranslation(x*f.getSegmentSize()+16, y*f.getSegmentSize()+16);
+		}
     }
 	protected Image getImage(String path) {
 
