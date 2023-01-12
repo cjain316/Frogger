@@ -89,11 +89,11 @@ public class Main extends JPanel implements KeyListener, ActionListener {
     	
     	//generate cars
     	boolean randir;
-    	for (int i = 0; i < grid.getLength();i++) {
+    	for (int a = 0; a < grid.getHeight();a++) {
     		randir = randomBool();
-    		for (int a = 0; a < grid.getHeight();a++) {
+    		for (int i = 0; i < grid.getLength();i++) {
     			if (grid.getValue(i, a) == 3) {
-    				if ((int)(Math.random()*10) > 7) {
+    				if ((int)(Math.random()*10) > 5) {
     					cars[i][a] = new Car(i,a,randir,1,grid);
     				}
     			}
