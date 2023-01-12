@@ -15,13 +15,9 @@ public class Street {
 	private int y;
 	
 	public Street(Grid g) {
-		width = 2;
-		y = 10;
-		for (int i = 0; i < g.getLength(); i++) {
-			for (int a = y; a < width+y; a++) {
-				g.setValue(i, a, 3);
-			}
-		}
+		generateRoad(2,10,g);
+		generateRoad(1,8,g);
+
 		System.out.println(g.toString());
 	}
 	
@@ -37,6 +33,14 @@ public class Street {
         	}
         }
     }
+	
+	private void generateRoad(int width, int offset, Grid g) {
+		for (int i = 0; i < g.getLength(); i++) {
+			for (int a = offset; a < width+offset; a++) {
+				g.setValue(i, a, 3);
+			}
+		}
+	}
 	
 	protected Image getImage(String path) {
 
