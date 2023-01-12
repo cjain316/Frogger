@@ -10,7 +10,7 @@ import javax.swing.Timer;
 //a
 public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grid grid = new Grid();
-	private Frog player = new Frog(0, 0,32, "Resources//FrogJump.gif");
+	private Frog player = new Frog(grid.getLength()/2, grid.getHeight()-1,32, "Resources//FrogIdle.gif");
 	private Log[] first = new Log[grid.getLength()+4];
 	private Car[][] cars = new Car[grid.getLength()][grid.getHeight()];
 	private Grass grass = new Grass(grid);
@@ -62,10 +62,10 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 		if (arg0.getExtendedKeyCode() == 65 && player.getX() > 0) {
 			player.setX(player.getX()-1);
 		}
-		if (arg0.getExtendedKeyCode() == 83 && player.getY() <= grid.getHeight()) {
+		if (arg0.getExtendedKeyCode() == 83 && player.getY() <= grid.getHeight()-2) {
 			player.setY(player.getY()+1);
 		}
-		if (arg0.getExtendedKeyCode() == 68 && player.getX() <= grid.getLength()) {
+		if (arg0.getExtendedKeyCode() == 68 && player.getX() <= grid.getLength()-2) {
 			player.setX(player.getX()+1);
 		}
 		

@@ -48,7 +48,7 @@ public class Frog {
     }
 
 	public void update(Grid f) {
-        tx.setToTranslation(x*f.getSegmentSize(), y*f.getSegmentSize());
+        tx.setToTranslation(x*f.getSegmentSize()+16, y*f.getSegmentSize()+16);
     }
 	protected Image getImage(String path) {
 
