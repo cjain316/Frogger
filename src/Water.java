@@ -15,9 +15,17 @@ public class Water {
 	private int y;
 	
 	public Water(Grid g) {
-		generateWater(2,5,g);
+		generateWater((int)((Math.random()*2)+1),(int)((Math.random()*8)+2),g);
+		generateWater((int)((Math.random()*2)+1),(int)((Math.random()*8)+2),g);
+		generateWater((int)((Math.random()*2)+1),(int)((Math.random()*8)+2),g);
 
 		System.out.println(g.toString());
+	}
+	
+	public void regenerateWater(Grid g) {
+		generateWater((int)((Math.random()*2)+1),(int)((Math.random()*8)+2),g);
+		generateWater((int)((Math.random()*2)+1),(int)((Math.random()*8)+2),g);
+		generateWater((int)((Math.random()*2)+1),(int)((Math.random()*8)+2),g);
 	}
 	
 	public void paint(Graphics g, Grid f) {
@@ -30,7 +38,7 @@ public class Water {
             		g2.drawImage(Sprite, tx, null);
         		}}}}
 	
-	private void generateWater(int width, int offset, Grid g) {
+	public void generateWater(int width, int offset, Grid g) {
 		for (int i = 0; i < g.getLength(); i++) {
 			for (int a = offset; a < width+offset; a++) {
 				g.setValue(i, a, 8);

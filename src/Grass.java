@@ -31,6 +31,25 @@ public class Grass {
 		}
 	}
 	
+	public void generateGrass(Grid g) {
+		int ran;
+		for (int i = 0; i < g.getLength(); i++) {
+			for (int a = 0; a < g.getHeight(); a++) {
+				if (g.getValue(i,a) == 1 || g.getValue(i, a) == 0) {
+					ran = (int)(Math.random()*10);
+					if (ran >= 9) {
+						g.setValue(i, a, 4);
+					} else if (ran > 6) {
+						g.setValue(i, a, 5);
+					} else {
+						g.setValue(i, a, 6);
+					}
+				
+				}
+			}
+		}
+	}
+	
 	public void paint(Graphics g, Grid f) {
         Graphics2D g2 = (Graphics2D) g;
         for (int i = 0; i < f.getLength();i++) {

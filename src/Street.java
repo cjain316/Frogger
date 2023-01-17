@@ -15,11 +15,17 @@ public class Street {
 	private int y;
 	
 	public Street(Grid g) {
-		generateRoad(2,10,g);
-		generateRoad(1,8,g);
-		generateRoad(2,2,g);
+		generateRoad((int)((Math.random()*2)+1),(int)((Math.random()*9)+2),g);
+		generateRoad((int)((Math.random()*2)+1),(int)((Math.random()*9)+2),g);
+		generateRoad((int)((Math.random()*2)+1),(int)((Math.random()*9)+2),g);
 
 		System.out.println(g.toString());
+	}
+	
+	public void regenerateStreet(Grid g) {
+		generateRoad((int)((Math.random()*2)+1),(int)((Math.random()*9)+2),g);
+		generateRoad((int)((Math.random()*2)+1),(int)((Math.random()*9)+2),g);
+		generateRoad((int)((Math.random()*2)+1),(int)((Math.random()*9)+2),g);
 	}
 	
 	public void paint(Graphics g, Grid f) {

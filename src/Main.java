@@ -49,6 +49,9 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         if (getRiding()[0] != -1) {player.paint(g,grid,logs[getRiding()[0]][getRiding()[1]]);} 
         else {player.paint(g, grid, null);}
         
+        if (player.getY() == 0) {
+			regenerate(grid, street, water, grass);
+		}
        }
 	
 	private int[] getRiding() {
@@ -150,6 +153,50 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         
        
         
+    }
+    
+    private void regenerate(Grid g, Street s, Water w, Grass gr) {
+    	g.regenerateGrid();
+    	gr.generateGrass(g);
+    	w.regenerateWater(g);
+    	s.regenerateStreet(g);
+    	player.setY(13);
+    	//Clear cars & logs
+    	for (int a = 0; a < grid.getHeight();a++) {
+    		for (int i = 0; i < grid.getLength();i++) {
+    			cars[i][a] = null;
+    		}
+    	}
+    	for (int a = 0; a < grid.getHeight();a++) {
+    		for (int i = 0; i < grid.getLength();i++) {
+    			logs[i][a] = null;
+    		}
+    	}
+    	
+    	
+    	//generate cars
+    	boolean randir;
+    	for (int a = 0; a < grid.getHeight();a++) {
+    		randir = randomBool();
+    		for (int i = 0; i < grid.getLength();i++) {
+    			if (grid.getValue(i, a) == 3) {
+    				if ((int)(Math.random()*10) > 5) {
+    					cars[i][a] = new Car(i,a,randir,1,grid);
+    				}
+    			}
+    		}
+    	}
+    	//generate logs
+    	for (int a = 0; a < grid.getHeight();a++) {
+    		randir = randomBool();
+    		for (int i = 0; i < grid.getLength();i++) {
+    			if (grid.getValue(i, a) == 8) {
+    				if ((int)(Math.random()*10) > 5) {
+    					logs[i][a] = new Log(i,a,randir,1,grid);
+    				}
+    			}
+    		}
+    	}
     }
     
     private boolean randomBool() {

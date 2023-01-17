@@ -51,6 +51,7 @@ public class Frog {
 		if (alive == false) {
 			x = f.getLength()/2;
 			y = f.getHeight()-2;
+			alive = true;
 		}
 		if (l!=null) {
 			tx.setToTranslation(x*f.getSegmentSize()+16+(l.getArtificial()*8), y*f.getSegmentSize()+16);

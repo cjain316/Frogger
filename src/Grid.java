@@ -22,6 +22,15 @@ public class Grid {
 	}
 	//
 	
+	public void regenerateGrid() {
+		for (int i = 0; i < length;i++) {
+			for (int a = 0; i < height;i++) {
+				grid[i][a] = 1;
+			}
+		}
+		System.out.println(toString());
+	}
+	
 	public Grid(int argS, int argL, int argH) {
 		segmentsize = argS;
 		length = argL;

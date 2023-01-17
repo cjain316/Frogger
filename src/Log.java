@@ -37,7 +37,8 @@ public class Log extends JPanel {
 	
 	public void update(Grid g,Frog f) {
 		counter++;
-		artificial = counter * -1;
+		if (direction) {artificial = counter;}
+		if (!direction) {artificial = -counter;}
 		if (x > g.getLength() + 2) {
 			x = 0;
 		}
