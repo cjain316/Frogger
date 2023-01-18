@@ -10,6 +10,7 @@ import javax.swing.Timer;
 //a
 public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grid grid = new Grid();
+	private Score score = new Score();
 	private Frog player = new Frog(grid.getLength()/2, grid.getHeight()-2,32, "Resources//FrogIdle.gif");
 	private Log[][] logs = new Log[grid.getLength()+4][grid.getHeight()];
 	private Car[][] cars = new Car[grid.getLength()][grid.getHeight()];
@@ -26,6 +27,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	
 	public void paint(Graphics g) {
         super.paintComponent(g);
+        update();
         grid.paint(g);
         grass.paint(g, grid);
         street.paint(g, grid);
@@ -46,12 +48,14 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         		}
         	}
         }
-        if (getRiding()[0] != -1) {player.paint(g,grid,logs[getRiding()[0]][getRiding()[1]]);} 
-        else {player.paint(g, grid, null);}
+        if (getRiding()[0] != -1) {player.paint(g,grid,logs[getRiding()[0]][getRiding()[1]], score);} 
+        else {player.paint(g, grid, null, score);}
         
         if (player.getY() == 0) {
+        	score.updateScore(1);
 			regenerate(grid, street, water, grass);
 		}
+        score.paint(g);
        }
 	
 	private int[] getRiding() {
@@ -85,6 +89,15 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		if (arg0.getExtendedKeyCode() == 82) {
+			regenerate(grid, street, water, grass);
+		}
 		if (arg0.getExtendedKeyCode() == 87 && player.getY() > 0) {
 			player.setY(player.getY()-1);
 		}
@@ -97,13 +110,6 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 		if (arg0.getExtendedKeyCode() == 68 && player.getX() <= grid.getLength()-2) {
 			player.setX(player.getX()+1);
 		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -155,8 +161,17 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         
     }
     
+    private void update() {
+    	player.update(grid, null, score);
+    }
+    
     private void regenerate(Grid g, Street s, Water w, Grass gr) {
-    	g.regenerateGrid();
+    	for (int i = 0; i < g.getLength();i++) {
+			for (int a = 0; a < g.getHeight();a++) {
+				g.setValue(i,a,1);
+			}
+		}
+    	System.out.println(g.toString());
     	gr.generateGrass(g);
     	w.regenerateWater(g);
     	s.regenerateStreet(g);

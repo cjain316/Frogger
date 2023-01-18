@@ -41,14 +41,15 @@ public class Frog {
 	public void setAlive(boolean argS) {alive = argS;}
 	
 	
-	public void paint(Graphics g, Grid f, Log l) {
-        update(f,l);
+	public void paint(Graphics g, Grid f, Log l, Score s) {
+        update(f,l,s);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(Sprite, tx, null);
     }
 
-	public void update(Grid f,Log l) {
+	public void update(Grid f,Log l, Score s) {
 		if (alive == false) {
+			s.updateScore(-1);
 			x = f.getLength()/2;
 			y = f.getHeight()-2;
 			alive = true;
