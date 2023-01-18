@@ -38,10 +38,6 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         			logs[i][a].update(grid,player);
         			logs[i][a].paint(g);
         		}
-        	}
-        }
-        for (int i = 0;i<grid.getLength();i++) {
-        	for (int a = 0;a<grid.getHeight();a++) {
         		if(cars[i][a] != null) {
         			cars[i][a].update(grid,player);
         			cars[i][a].paint(g);
