@@ -50,7 +50,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         if (getRiding()[0] == -1 && grid.getValue(player.getX(), player.getY())==8) {player.setAlive(false);}
         
         if (player.getY() == 0) {
-        	score.updateScore(1);
+        	score.updateScore(2);
 			regenerate(grid, street, water, grass);
 		}
         score.paint(g);
@@ -95,9 +95,7 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 		// TODO Auto-generated method stub
 		if (arg0.getExtendedKeyCode() == 82) {
 			regenerate(grid, street, water, grass);
-		}
-		if (arg0.getExtendedKeyCode() == 45) {
-			score.updateScore(1);
+			score.updateScore(-1);
 		}
 		if (arg0.getExtendedKeyCode() == 87 && player.getY() > 0) {
 			player.setY(player.getY()-1);
