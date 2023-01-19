@@ -1,9 +1,16 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
+import java.net.URL;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -17,6 +24,10 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	private Grass grass = new Grass(grid);
 	private Street street = new Street(grid);
 	private Water water = new Water(grid);
+	private String resetPath = "Resources//ResetButton.png";
+	private AffineTransform tx;
+	private Image Sprite;
+	private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
 	Timer c = new Timer(1,this);
 	
 	public static void main(String[] args) {
@@ -27,11 +38,23 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	
 	public void paint(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
         update();
         grid.paint(g);
         grass.paint(g, grid);
         street.paint(g, grid);
         water.paint(g, grid);
+        
+        //Reset Indicator
+        tx = AffineTransform.getTranslateInstance(1400, 25);
+		Sprite = getImage(resetPath);
+		g2.drawImage(Sprite, tx, null);
+		
+		g.setFont(font);
+		g.setColor(Color.WHITE);
+		g.drawString("-1 Point", 1412, 110);
+		
+		
         for (int i = 0;i<grid.getLength();i++) {
         	for (int a = 0;a<grid.getHeight();a++) {
         		if(logs[i][a] != null) {
@@ -221,5 +244,15 @@ public class Main extends JPanel implements KeyListener, ActionListener {
     		return false;
     	}
     }
+    
+    protected Image getImage(String path) {
+
+        Image tempImage = null;
+        try {
+            URL imageURL = Background.class.getResource(path);
+            tempImage    = Toolkit.getDefaultToolkit().getImage(imageURL);
+        } catch (Exception e) {e.printStackTrace();}
+        return tempImage;
+    } 
 
 }
