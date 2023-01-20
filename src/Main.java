@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -28,12 +30,18 @@ public class Main extends JPanel implements KeyListener, ActionListener {
 	private AffineTransform tx;
 	private Image Sprite;
 	private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
+	private static String[] musicPath = {"coc.wav","coc-trap.wav"};
+	private static Music music;
+	private Music win = new Music("mrbreast.wav",false);
+	private AffineTransform ta = AffineTransform.getTranslateInstance(0, 0);;
+	private Image mrbeast = getImage("Resources\\mrbreast.gif");
 	Timer c = new Timer(1,this);
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Main f = new Main();
-		
+		music = new Music(musicPath[(int)(Math.random()*(musicPath.length))], true);
+		music.play();
 	}
 	
 	public void paint(Graphics g) {
@@ -74,6 +82,8 @@ public class Main extends JPanel implements KeyListener, ActionListener {
         
         if (player.getY() == 0) {
         	score.updateScore(2);
+        	g2.drawImage(mrbeast, ta, null);
+        	win.play();
 			regenerate(grid, street, water, grass);
 		}
         score.paint(g);

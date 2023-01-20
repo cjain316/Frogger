@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,6 +14,7 @@ public class Frog {
 	int x,y;
 	int size;
 	private boolean alive;
+	private Music death = new Music("Boowomp.wav",false);
 	//as
 	
 	public Frog() {
@@ -49,6 +52,7 @@ public class Frog {
 
 	public void update(Grid f,Log l, Score s) {
 		if (alive == false) {
+			death.play();
 			s.updateScore(-1);
 			x = f.getLength()/2;
 			y = f.getHeight()-2;

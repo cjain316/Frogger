@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -50,7 +52,7 @@ public class Score {
 		      GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 
 		    for (int i = 0; i < fonts.length; i++) {
-		      System.out.println(fonts[i]);
+		      //System.out.println(fonts[i]);
 		    }
 		  }
 }
